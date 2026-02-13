@@ -38,3 +38,28 @@ test
 ----------
 Set up UI framework and styling - I want to use Material-UI. Remove placeholder code from App.tsx.
 
+----------
+13-02-26 13:10
+----------
+Change app styling. I want to be modern, bright, clean, with a nice typography resembling a book.
+
+----------
+13-02-26 13:15
+----------
+Now create a navigation component that will contain a menu. Menu should be horizontal bar, should have buttons directing to 3 main sections: browse, catalog, rate. Menu component should be centered, placed just below the BookPilot header. Do not worry about hooking up button actions yet, just add it to the main view.
+
+----------
+13-02-26 13:20
+----------
+Create 3 components to be hooked up to the buttons. They can be empty for now, or create placeholder text in them like "browse content", "catalog content" etc. The important bit is that selected content is displayed below the navigation menu after button is clicked. Make sure each component has correct routing.
+
+----------
+13-02-26 13:25
+----------
+There's too much space between header and menu component, looks like header has a big bottom margin set. Remove it.
+
+----------
+13-02-26 13:26
+----------
+Remove the margin completely
+

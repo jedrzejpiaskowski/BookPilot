@@ -1,12 +1,25 @@
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
+  /* Modern Book-Inspired Color Palette */
+  --primary: #2c3e50;        /* Deep charcoal */
+  --secondary: #c59559;      /* Warm gold/bronze */
+  --accent: #e8f4f8;         /* Light sky blue */
+  --background: #fafaf8;     /* Warm off-white */
+  --text: #2c3e50;           /* Deep charcoal */
+  --text-light: #666666;     /* Medium gray */
+  --border: #e0ddd8;         /* Soft beige */
+  --shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+
+  /* Typography */
+  font-family: 'Lora', 'Georgia', serif;
+  line-height: 1.6;
   font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  /* Color scheme */
+  color-scheme: light;
+  color: var(--text);
+  background-color: var(--background);
 
+  /* Text rendering */
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -15,24 +28,41 @@
 
 a {
   font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+  color: var(--secondary);
+  text-decoration: none;
+  transition: color 0.3s ease;
 }
+
 a:hover {
-  color: #535bf2;
+  color: var(--primary);
+  text-decoration: underline;
 }
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  background-color: var(--background);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Playfair Display', 'Georgia', serif;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  color: var(--primary);
 }
 
 h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+  font-size: 3.5em;
+}
+
+h2 {
+  font-size: 2.5em;
+}
+
+h3 {
+  font-size: 1.8em;
 }
 
 button {
