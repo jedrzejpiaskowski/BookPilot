@@ -63,3 +63,40 @@ There's too much space between header and menu component, looks like header has 
 ----------
 Remove the margin completely
 
+----------
+14-02-26 10:30
+----------
+Modify navigation so it's more tab-based layout, meaning tabs are integrated and visually blend into the page content below. Top menu should look like connected tabs, switching tabs should replace the main content area and the active tab should appear as a natural extension of the page content (no visual separation). Attaching image as reference. Keep the typography and color scheme.
+
+----------
+14-02-26 10:35
+----------
+Adjust active nav-button style to add left, top and right border to indicate active selection more visibly. It should be a subtle effect, thin light grey border that matches the rest of the style.
+
+----------
+14-02-26 10:40
+----------
+Update the global page styles so that the main content background is no longer pure white.
+Replace it with a light warm beige tone resembling aged paper (very subtle, not yellow, not brown).
+
+Add a very subtle paper-like texture with extremely low contrast — it should be barely noticeable and only visible on close inspection.
+
+The effect should feel elegant and minimal, not vintage-heavy or sepia.
+Avoid strong gradients, stains, or obvious noise patterns.
+The UI must remain clean, modern, and readable.
+
+----------
+14-02-26 10:45
+----------
+I want Browse section to have a big centered search bar with magnifying glass icon. Put placeholder greyed out "book title, author..." text inside searchbar to indicate what users can search for. Remove existing header and text from the browse component.
+
+----------
+14-02-26 10:50
+----------
+I want searchbar centered but horiontally (as it is), but vertically should be placed near the top, not in the middle. Also on the right there should be a "search" button.
+
+----------
+14-02-26 10:55
+----------
+Let's create an API client that integrates with OpenLibrary API https://openlibrary.org/developers/api I want to bo able to utilize it's search capabilities when user sumbits search input. Input should be debounced. You can print the results to the console or show raw json response under the search bar for now.
+

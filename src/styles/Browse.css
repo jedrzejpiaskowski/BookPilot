@@ -1,0 +1,127 @@
+.browse-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  min-height: auto;
+  padding: 2rem;
+  gap: 2rem;
+}
+
+.search-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.search-icon {
+  position: absolute;
+  left: 1.5rem;
+  color: var(--text-light);
+  font-size: 1.5rem !important;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.search-input {
+  flex: 1;
+  padding: 1rem 1.5rem 1rem 3.5rem;
+  font-family: 'Lora', 'Georgia', serif;
+  font-size: 1.1em;
+  color: var(--text);
+  background-color: white;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  outline: none;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow);
+}
+
+.search-input::placeholder {
+  color: var(--text-light);
+  opacity: 0.6;
+}
+
+.search-input:focus {
+  border-color: var(--secondary);
+  box-shadow: 0 4px 16px rgba(197, 149, 89, 0.15);
+}
+
+.search-input:hover {
+  border-color: var(--secondary);
+}
+
+.search-button {
+  padding: 1rem 2rem;
+  font-family: 'Lora', 'Georgia', serif;
+  font-size: 1em;
+  font-weight: 500;
+  color: white;
+  background-color: var(--secondary);
+  border: 2px solid var(--secondary);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.search-button:hover {
+  background-color: #b38449;
+  border-color: #b38449;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(197, 149, 89, 0.3);
+}
+
+.search-button:active {
+  transform: translateY(0);
+}
+
+/* Search Results Styles */
+.search-results {
+  width: 100%;
+  max-width: 600px;
+  margin-top: 1rem;
+}
+
+.results-status,
+.results-error {
+  text-align: center;
+  padding: 2rem 1rem;
+  color: var(--text-light);
+  font-size: 1.05em;
+}
+
+.results-error {
+  color: #c41c3b;
+  background-color: rgba(196, 28, 59, 0.05);
+  border-radius: 4px;
+  padding: 1.5rem;
+}
+
+.results-container {
+  padding: 1.5rem 0;
+}
+
+.results-count {
+  margin: 0 0 1rem 0;
+  color: var(--primary);
+  font-weight: 500;
+  font-size: 1.05em;
+}
+
+.results-json {
+  background-color: white;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 1rem;
+  overflow-x: auto;
+  max-height: 400px;
+  overflow-y: auto;
+  font-family: 'Courier New', monospace;
+  font-size: 0.85em;
+  color: var(--text);
+  margin: 0;
+}
