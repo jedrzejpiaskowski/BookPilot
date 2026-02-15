@@ -100,3 +100,28 @@ I want searchbar centered but horiontally (as it is), but vertically should be p
 ----------
 Let's create an API client that integrates with OpenLibrary API https://openlibrary.org/developers/api I want to bo able to utilize it's search capabilities when user sumbits search input. Input should be debounced. You can print the results to the console or show raw json response under the search bar for now.
 
+----------
+15-02-26 19:31
+----------
+Create a new component for presenting a book in search results. I want a card or a tile that will have all the basic information: img with cover on the left with src that calls #sym:getCoverUrl function; bold title at the top, author below and publish date. Replace json results with array of such component. It should match current styling and be responsive - all elements should wrap automatically.
+
+----------
+15-02-26 19:41
+----------
+Is there some more useful information you can show on the card? For example genre, or average number of pages?
+
+----------
+15-02-26 19:51
+----------
+I can see results are limited to 10. Change that to 9, but allow users to fetch next set of results: add 'Next' button below the results array. If user is not on first page of the results, there should also be 'Previous' button.
+
+----------
+15-02-26 19:55
+----------
+Remove the 'Found X books'. Add something less technical and more user friendly like 'Here are your results'.
+
+----------
+15-02-26 20:01
+----------
+I don't like how the search bar works. It starts to search if user stops typing. I don't want that, I need the action to be deliberate: search only after enter was presses or if user clicked the search button. Also make sure to disable the button while calling API and do not allow search to be triggered very quickly in short succession by accident.
+

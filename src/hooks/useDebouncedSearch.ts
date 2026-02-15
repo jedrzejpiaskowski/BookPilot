@@ -4,6 +4,7 @@ import type { SearchResponse } from '../api/openlibraryClient'
 
 export function useDebouncedSearch(
   query: string,
+  page: number,
   delay: number = 500
 ): {
   results: SearchResponse | null
@@ -34,7 +35,7 @@ export function useDebouncedSearch(
     // Set debounce timer
     debounceTimer.current = setTimeout(async () => {
       try {
-        const response = await searchBooks(query)
+        const response = await searchBooks(query, { page, limit: 9 })
         setResults(response)
         setError(null)
         console.log('Search results:', response)
@@ -54,7 +55,7 @@ export function useDebouncedSearch(
         clearTimeout(debounceTimer.current)
       }
     }
-  }, [query, delay])
+  }, [query, page, delay])
 
   return { results, loading, error }
 }

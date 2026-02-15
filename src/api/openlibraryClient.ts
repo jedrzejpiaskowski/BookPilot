@@ -6,6 +6,8 @@ export interface BookResult {
   title: string
   author_name?: string[]
   first_publish_year?: number
+  subject?: string[]
+  number_of_pages_median?: number
   isbn?: string[]
   cover_i?: number
 }
@@ -16,14 +18,21 @@ export interface SearchResponse {
   start: number
 }
 
-export async function searchBooks(query: string): Promise<SearchResponse> {
+export async function searchBooks(
+  query: string,
+  options: { limit?: number; page?: number } = {}
+): Promise<SearchResponse> {
   if (!query.trim()) {
     return { docs: [], numFound: 0, start: 0 }
   }
 
+  const limit = options.limit ?? 9
+  const page = options.page ?? 1
+  const offset = (page - 1) * limit
+
   try {
     const response = await fetch(
-      `${OPENLIBRARY_API}?title=${encodeURIComponent(query)}&limit=10`
+      `${OPENLIBRARY_API}?title=${encodeURIComponent(query)}&limit=${limit}&offset=${offset}`
     )
 
     if (!response.ok) {
