@@ -125,3 +125,12 @@ Remove the 'Found X books'. Add something less technical and more user friendly 
 ----------
 I don't like how the search bar works. It starts to search if user stops typing. I don't want that, I need the action to be deliberate: search only after enter was presses or if user clicked the search button. Also make sure to disable the button while calling API and do not allow search to be triggered very quickly in short succession by accident.
 
+----------
+15-02-26 20:11
+----------
+Now I want to allow users to add their selected searched books to their local collection that will be saved in indexedDb. Add a small 'save' button to the book result card that will trigger this action.
+
+----------
+15-02-26 20:18
+----------
+Now I want to be able to browse through all my saved books collection in Catalog component. Display similar list there that I have in Browse, but the card should also display timestamp of when book was saved and instead of a save/star button there should be a button to remove it from saved books collection.

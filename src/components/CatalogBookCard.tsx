@@ -1,32 +1,26 @@
-import { useState, useEffect } from 'react'
-import type { BookResult } from '../api/openlibraryClient'
+import { useState } from 'react'
+import type { SavedBook } from '../services/indexedDBService'
 import { getCoverUrl } from '../api/openlibraryClient'
-import { saveBook, isBookSaved } from '../services/indexedDBService'
+import { removeBook } from '../services/indexedDBService'
 
-interface BookResultCardProps {
-  book: BookResult
+interface CatalogBookCardProps {
+  book: SavedBook
+  onRemove: (bookKey: string) => void
 }
 
-export default function BookResultCard({ book }: BookResultCardProps) {
-  const [isSaved, setIsSaved] = useState(false)
-  const [isSaving, setIsSaving] = useState(false)
+export default function CatalogBookCard({ book, onRemove }: CatalogBookCardProps) {
+  const [isRemoving, setIsRemoving] = useState(false)
 
-  useEffect(() => {
-    // Check if this book is already in the saved collection
-    isBookSaved(book.key).then(setIsSaved).catch(console.error)
-  }, [book.key])
+  const handleRemoveBook = async () => {
+    if (isRemoving) return
 
-  const handleSaveBook = async () => {
-    if (isSaved || isSaving) return
-
-    setIsSaving(true)
+    setIsRemoving(true)
     try {
-      await saveBook(book)
-      setIsSaved(true)
+      await removeBook(book.key)
+      onRemove(book.key)
     } catch (error) {
-      console.error('Failed to save book:', error)
-    } finally {
-      setIsSaving(false)
+      console.error('Failed to remove book:', error)
+      setIsRemoving(false)
     }
   }
 
@@ -36,8 +30,15 @@ export default function BookResultCard({ book }: BookResultCardProps) {
   const genre = book.subject?.slice(0, 2).join(', ')
   const pages = book.number_of_pages_median
 
+  // Format the save date
+  const savedDate = new Date(book.savedAt).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+  })
+
   return (
-    <article className="book-result-card">
+    <article className="catalog-book-card">
       <div className="book-cover">
         {coverId ? (
           <img
@@ -53,12 +54,12 @@ export default function BookResultCard({ book }: BookResultCardProps) {
         <div className="book-header">
           <h3 className="book-title">{book.title}</h3>
           <button
-            className={`save-button ${isSaved ? 'saved' : ''}`}
-            onClick={handleSaveBook}
-            disabled={isSaved || isSaving}
-            title={isSaved ? 'Added to your collection' : 'Add to your collection'}
+            className="remove-button"
+            onClick={handleRemoveBook}
+            disabled={isRemoving}
+            title="Remove from collection"
           >
-            {isSaved ? '★' : '☆'}
+            ✕
           </button>
         </div>
         <p className="book-author">{author}</p>
@@ -73,6 +74,9 @@ export default function BookResultCard({ book }: BookResultCardProps) {
             <span className="book-label">Pages:</span> {pages}
           </p>
         )}
+        <p className="book-saved-date">
+          <span className="book-label">Saved:</span> {savedDate}
+        </p>
       </div>
     </article>
   )

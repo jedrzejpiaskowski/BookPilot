@@ -1,0 +1,85 @@
+import type { BookResult } from '../api/openlibraryClient'
+
+export interface SavedBook extends BookResult {
+  savedAt: number // Timestamp when book was saved
+}
+
+const DB_NAME = 'BookPilotDB'
+const DB_VERSION = 1
+const STORE_NAME = 'savedBooks'
+
+let db: IDBDatabase | null = null
+
+export async function initDB(): Promise<IDBDatabase> {
+  if (db) return db
+
+  return new Promise((resolve, reject) => {
+    const request = indexedDB.open(DB_NAME, DB_VERSION)
+
+    request.onerror = () => reject(request.error)
+    request.onsuccess = () => {
+      db = request.result
+      resolve(db)
+    }
+
+    request.onupgradeneeded = (event) => {
+      const database = (event.target as IDBOpenDBRequest).result
+      if (!database.objectStoreNames.contains(STORE_NAME)) {
+        const store = database.createObjectStore(STORE_NAME, { keyPath: 'key' })
+        store.createIndex('savedAt', 'savedAt', { unique: false })
+      }
+    }
+  })
+}
+
+export async function saveBook(book: BookResult): Promise<void> {
+  const database = await initDB()
+  return new Promise((resolve, reject) => {
+    const transaction = database.transaction([STORE_NAME], 'readwrite')
+    const store = transaction.objectStore(STORE_NAME)
+    const savedBook: SavedBook = {
+      ...book,
+      savedAt: Date.now(),
+    }
+    const request = store.put(savedBook)
+
+    request.onerror = () => reject(request.error)
+    request.onsuccess = () => resolve()
+  })
+}
+
+export async function isBookSaved(bookKey: string): Promise<boolean> {
+  const database = await initDB()
+  return new Promise((resolve, reject) => {
+    const transaction = database.transaction([STORE_NAME], 'readonly')
+    const store = transaction.objectStore(STORE_NAME)
+    const request = store.get(bookKey)
+
+    request.onerror = () => reject(request.error)
+    request.onsuccess = () => resolve(!!request.result)
+  })
+}
+
+export async function getAllSavedBooks(): Promise<SavedBook[]> {
+  const database = await initDB()
+  return new Promise((resolve, reject) => {
+    const transaction = database.transaction([STORE_NAME], 'readonly')
+    const store = transaction.objectStore(STORE_NAME)
+    const request = store.getAll()
+
+    request.onerror = () => reject(request.error)
+    request.onsuccess = () => resolve(request.result)
+  })
+}
+
+export async function removeBook(bookKey: string): Promise<void> {
+  const database = await initDB()
+  return new Promise((resolve, reject) => {
+    const transaction = database.transaction([STORE_NAME], 'readwrite')
+    const store = transaction.objectStore(STORE_NAME)
+    const request = store.delete(bookKey)
+
+    request.onerror = () => reject(request.error)
+    request.onsuccess = () => resolve()
+  })
+}
