@@ -134,3 +134,63 @@ Now I want to allow users to add their selected searched books to their local co
 15-02-26 20:18
 ----------
 Now I want to be able to browse through all my saved books collection in Catalog component. Display similar list there that I have in Browse, but the card should also display timestamp of when book was saved and instead of a save/star button there should be a button to remove it from saved books collection.
+
+----------
+16-02-26 08:24
+----------
+When I search for books but then switch tabs back and forth I lose my results. I want to have state preserved.
+
+----------
+16-02-26 08:29
+----------
+In #file:Browse.tsx make sure pagination controls are only displayed if the results contain at least max (=9 results). No point in displaying page and Previous/Next buttons if there are no more results.
+
+----------
+16-02-26 08:31
+----------
+Make the 9 some accessible property resued by component and API client like searchResultLimit rather than hardcoded value in 2 files
+
+----------
+16-02-26 08:35
+----------
+Last 2 entries in #file:prompt-log.md had incorrect time. You keep putting 00:00, but I want an actual time, can be UTC. Can you fix that? Only for last 2 entries, previously it was working fine. Make sure this is the default behaviour going on forward.
+
+----------
+16-02-26 08:36
+----------
+Where did you get the time? It says 12:15 and it's 9:36 at the time of writing in my time zone. Even for UTC it would be 8:36, something is wrong.
+
+----------
+16-02-26 08:37
+----------
+UTC
+
+----------
+16-02-26 08:40
+----------
+Now adjust #file:copilot-instructions.md to specify I want to use real UTC time every time. I don't mind if you need to execute command to Get-Date command on each prompt. DO NOT guess time or use time from a different time zone.
+
+----------
+16-02-26 08:45
+----------
+Create a home component that will be the default route when I access the page. It should contain a brief description of what the app does, shortly describing each section. Add new navigation button for it as the first item, I want it to have a home icon.
+
+----------
+16-02-26 08:49
+----------
+Ok I also want section names mentioned in description in bold + it should also be a link. Make them goldrenrod color with an underline when hovered.
+
+----------
+16-02-26 08:51
+----------
+That's fine, but DO NOT change link color when hovered. Only decoration should be underline, keep the goldenrod color.
+
+----------
+16-02-26 08:58
+----------
+#file:Browse.tsx shows "Here are your results" even though search provided no results. It should be displayed only if some books were found. Add a suitable message if no books found.
+
+----------
+16-02-26 09:00
+----------
+Try to determine if it's possible to use open library API to search for books but by providing author name. So if I input 'tolkien' I want to find Lord of the rings books, not some tolkien biography.

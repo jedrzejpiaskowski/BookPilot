@@ -92,6 +92,13 @@
   letter-spacing: 0.5px;
   position: relative;
   top: 1px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.nav-icon {
+  font-size: 1.1em;
 }
 
 .nav-button:hover {
@@ -141,6 +148,17 @@
   color: var(--text-light);
   line-height: 1.8;
   font-size: 1.05em;
+}
+
+.home-section-link {
+  color: goldenrod;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.home-section-link:hover {
+  color: goldenrod;
+  text-decoration: underline;
 }
 
 main {

@@ -16,7 +16,8 @@ For every user prompt received in this project, append it to a log file in the f
 ```
 
 **Requirements:**
-- Use the current date and time in 24-hour format (dd-MM-yy HH:mm)
+- Use the current date and time in UTC in 24-hour format (dd-MM-yy HH:mm)
+- Use a real UTC timestamp (e.g., via a command like Get-Date in UTC); do not guess or use a non-UTC timezone
 - Append to the existing file (do not overwrite)
 - Include a blank line after each prompt entry
 - Save the prompt exactly as entered by the user

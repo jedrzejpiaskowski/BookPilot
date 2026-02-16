@@ -4,8 +4,8 @@
   justify-content: flex-start;
   align-items: center;
   min-height: auto;
-  padding: 2rem;
-  gap: 2rem;
+  /* padding: 2rem; */
+  /* gap: 2rem; */
 }
 
 .catalog-title {

@@ -1,4 +1,5 @@
 // OpenLibrary API Client
+import { searchResultLimit } from '../constants/search'
 const OPENLIBRARY_API = 'https://openlibrary.org/search.json'
 
 export interface BookResult {
@@ -20,19 +21,29 @@ export interface SearchResponse {
 
 export async function searchBooks(
   query: string,
-  options: { limit?: number; page?: number } = {}
+  options: { limit?: number; page?: number; searchType?: 'title' | 'author' | 'general' } = {}
 ): Promise<SearchResponse> {
   if (!query.trim()) {
     return { docs: [], numFound: 0, start: 0 }
   }
 
-  const limit = options.limit ?? 9
+  const limit = options.limit ?? searchResultLimit
   const page = options.page ?? 1
   const offset = (page - 1) * limit
+  const searchType = options.searchType ?? 'general'
+
+  let queryParam = ''
+  if (searchType === 'title') {
+    queryParam = `title=${encodeURIComponent(query)}`
+  } else if (searchType === 'author') {
+    queryParam = `author=${encodeURIComponent(query)}`
+  } else {
+    queryParam = `q=${encodeURIComponent(query)}`
+  }
 
   try {
     const response = await fetch(
-      `${OPENLIBRARY_API}?title=${encodeURIComponent(query)}&limit=${limit}&offset=${offset}`
+      `${OPENLIBRARY_API}?${queryParam}&limit=${limit}&offset=${offset}`
     )
 
     if (!response.ok) {

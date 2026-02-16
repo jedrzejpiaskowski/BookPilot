@@ -1,10 +1,12 @@
 import { useState, useEffect, useRef } from 'react'
 import { searchBooks } from '../api/openlibraryClient'
 import type { SearchResponse } from '../api/openlibraryClient'
+import { searchResultLimit } from '../constants/search'
 
 export function useDebouncedSearch(
   query: string,
   page: number,
+  searchType: 'title' | 'author' | 'general' = 'general',
   delay: number = 500
 ): {
   results: SearchResponse | null
@@ -35,7 +37,7 @@ export function useDebouncedSearch(
     // Set debounce timer
     debounceTimer.current = setTimeout(async () => {
       try {
-        const response = await searchBooks(query, { page, limit: 9 })
+        const response = await searchBooks(query, { page, limit: searchResultLimit, searchType })
         setResults(response)
         setError(null)
         console.log('Search results:', response)
@@ -55,7 +57,7 @@ export function useDebouncedSearch(
         clearTimeout(debounceTimer.current)
       }
     }
-  }, [query, page, delay])
+  }, [query, page, searchType, delay])
 
   return { results, loading, error }
 }
