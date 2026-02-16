@@ -107,3 +107,25 @@ export async function updateBookStatus(
     }
   })
 }
+
+export async function updateBookRating(bookKey: string, rating: number): Promise<void> {
+  const database = await initDB()
+  return new Promise((resolve, reject) => {
+    const transaction = database.transaction([STORE_NAME], 'readwrite')
+    const store = transaction.objectStore(STORE_NAME)
+    const getRequest = store.get(bookKey)
+
+    getRequest.onerror = () => reject(getRequest.error)
+    getRequest.onsuccess = () => {
+      const book = getRequest.result
+      if (book) {
+        book.rating = Math.max(0, Math.min(5, rating)) // Clamp between 0-5
+        const updateRequest = store.put(book)
+        updateRequest.onerror = () => reject(updateRequest.error)
+        updateRequest.onsuccess = () => resolve()
+      } else {
+        reject(new Error('Book not found'))
+      }
+    }
+  })
+}

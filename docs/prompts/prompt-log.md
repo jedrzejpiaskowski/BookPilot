@@ -299,3 +299,20 @@ I noticed that books covered are fetched every time. Can we do some sort of cach
 16-02-26 13:22
 ----------
 There's still some delay when displaying covers, are you sure they're cached? Is there a way to verify that?
+
+----------
+16-02-26 13:31
+----------
+Now add rating property to #sym:BookResult. Let's go with whatever is suitable for a 5-star rating system.
+
+----------
+16-02-26 13:34
+----------
+Now let's render all books that have a 'reading' status in #file:Rate.tsx view. It can be a similar component to what we have in #file:BookResultCard.tsx  but it will have more functionality so better to create w new one.
+
+----------
+16-02-26 13:51
+----------
+I want to highlight books with top 5/5 rating. Add some special distinction for them like golden border or some subtle animation. Must be elegant yet inidicating unique quality. Something similar should be done for 4/5 rating, but subdued accordingly. Books with rating 0-3 will look the same.
+
+
