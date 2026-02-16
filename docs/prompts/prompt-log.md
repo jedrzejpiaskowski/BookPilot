@@ -370,6 +370,11 @@ When user sets book's progress to 100% I want to display a golden toast notifica
 ----------
 Can't you reuse the some snackbar component that was used here? Why do we need new Toast component that does very similar thing?
 
+----------
+16-02-26 20:10
+----------
+Add a bit more detailed overview of the project now that most of it is implemented. Take a look at all component details and commit history if you need to.
+
 
 
 
