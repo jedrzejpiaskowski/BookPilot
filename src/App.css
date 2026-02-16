@@ -167,10 +167,8 @@
 }
 
 .content-section p {
-  margin: 0 0 1rem 0;
   color: var(--text-light);
   line-height: 1.8;
-  font-size: 1.05em;
 }
 
 @media (max-width: 768px) {

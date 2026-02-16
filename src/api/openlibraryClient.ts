@@ -11,6 +11,7 @@ export interface BookResult {
   number_of_pages_median?: number
   isbn?: string[]
   cover_i?: number
+  status?: 'saved' | 'wishlist' | 'reading'
 }
 
 export interface SearchResponse {

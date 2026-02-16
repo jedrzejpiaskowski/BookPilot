@@ -228,7 +228,7 @@
 }
 
 .results-count {
-  margin: 0 0 1rem 0;
+  margin: 0 0 2rem 0;
   color: var(--primary);
   font-weight: 500;
   font-size: 1.05em;
@@ -318,7 +318,6 @@
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 0.35rem;
 }
 
 .book-header {

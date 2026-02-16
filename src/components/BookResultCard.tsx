@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react'
+import Snackbar from '@mui/material/Snackbar'
+import Alert from '@mui/material/Alert'
 import type { BookResult } from '../api/openlibraryClient'
 import { getCoverUrl } from '../api/openlibraryClient'
-import { saveBook, isBookSaved } from '../services/indexedDBService'
+import { saveBook, isBookSaved, removeBook } from '../services/indexedDBService'
 
 interface BookResultCardProps {
   book: BookResult
@@ -10,6 +12,8 @@ interface BookResultCardProps {
 export default function BookResultCard({ book }: BookResultCardProps) {
   const [isSaved, setIsSaved] = useState(false)
   const [isSaving, setIsSaving] = useState(false)
+  const [toastOpen, setToastOpen] = useState(false)
+  const [toastMessage, setToastMessage] = useState('')
 
   useEffect(() => {
     // Check if this book is already in the saved collection
@@ -17,17 +21,32 @@ export default function BookResultCard({ book }: BookResultCardProps) {
   }, [book.key])
 
   const handleSaveBook = async () => {
-    if (isSaved || isSaving) return
+    if (isSaving) return
 
     setIsSaving(true)
     try {
-      await saveBook(book)
-      setIsSaved(true)
+      const trimmedTitle = book.title.length > 20 ? book.title.substring(0, 20) + '...' : book.title
+      if (isSaved) {
+        // Remove the book from collection
+        await removeBook(book.key)
+        setIsSaved(false)
+        setToastMessage(`Removed "${trimmedTitle}" from your collection`)
+      } else {
+        // Add the book to collection
+        await saveBook(book)
+        setIsSaved(true)
+        setToastMessage(`Added "${trimmedTitle}" to your collection`)
+      }
+      setToastOpen(true)
     } catch (error) {
-      console.error('Failed to save book:', error)
+      console.error('Failed to save/remove book:', error)
     } finally {
       setIsSaving(false)
     }
+  }
+
+  const handleCloseToast = () => {
+    setToastOpen(false)
   }
 
   const coverId = book.cover_i
@@ -37,6 +56,7 @@ export default function BookResultCard({ book }: BookResultCardProps) {
   const pages = book.number_of_pages_median
 
   return (
+    <>
     <article className="book-result-card">
       <div className="book-cover">
         {coverId ? (
@@ -55,8 +75,8 @@ export default function BookResultCard({ book }: BookResultCardProps) {
           <button
             className={`save-button ${isSaved ? 'saved' : ''}`}
             onClick={handleSaveBook}
-            disabled={isSaved || isSaving}
-            title={isSaved ? 'Added to your collection' : 'Add to your collection'}
+            disabled={isSaving}
+            title={isSaved ? 'Remove from your collection' : 'Add to your collection'}
           >
             {isSaved ? '★' : '☆'}
           </button>
@@ -75,5 +95,20 @@ export default function BookResultCard({ book }: BookResultCardProps) {
         )}
       </div>
     </article>
+    <Snackbar
+      open={toastOpen}
+      autoHideDuration={2000}
+      onClose={handleCloseToast}
+      anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+    >
+      <Alert
+        onClose={handleCloseToast}
+        severity="success"
+        sx={{ width: '100%' }}
+      >
+        {toastMessage}
+      </Alert>
+    </Snackbar>
+    </>
   )
 }

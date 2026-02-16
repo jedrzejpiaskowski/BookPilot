@@ -224,3 +224,58 @@ I noticed that site is not responsive, it looks bad on smaller screens: menu but
 16-02-26 10:25
 ----------
 That's better, but magnifying glass icon is off, displayed below the actual search bar. Fix that.
+
+----------
+16-02-26 12:02
+----------
+Improve the behaviour of save book to collection button. Once saved, user should be able to click it again to remove it.
+
+----------
+16-02-26 12:06
+----------
+Now I also want to notify the user of these actions. Display a toast message that hides automatically after couple of seconds saying 'Added X to your collection' and 'Removed X from your collection' when user clicks the button. Make sure book title is trimmed to let's say 20 characters so that message is not too long.
+
+----------
+16-02-26 12:17
+----------
+Let's divide #file:Catalog.tsx collection to multiple sections. Main section that will take 2/3 of the width is the default: saved books. But I also want to display 2 sections on the side panel on the right: 'Whishlist' and 'Reading'. Therefore #sym:BookResult should be in one of 3 available states: saved (default), whishlist, reading. Add a subtle style distinction for these 2 new sections like border or different background (that matches the rest of the page) so that their area is visible, I want to add drag & drop functionality later.
+
+----------
+16-02-26 12:18
+----------
+Looks good for the most part, but remove from collection button is black for some reason. Also margins for <p> elements are too big. Remove them.
+
+----------
+16-02-26 12:30
+----------
+Adjust styling of the #file:CatalogBookCard.tsx so it looks more like a card, perhaps border missing. I want a style that indicates this item can be dragged with a mouse.
+
+----------
+16-02-26 12:38
+----------
+Grid layout doesn't work for mobile screens. Adjust so it's 2 items on higher res and just 1 item per row on mobile.
+
+----------
+16-02-26 12:49
+----------
+Add 2 small buttons with icons below the #sym:.book-meta section: 'Whishlist' and 'Reading'. Book should change it's status when clicked and should be moved to appropriate section. I want different, minimal representation of books in new sections: it should be book cover and title only, displayed as a list, so one book per row.
+
+----------
+16-02-26 12:53
+----------
+Great, but now instead of tick icon I want save icon (or floppy disk icon) that will move book back to saved. Also I should be able to move books from wishlist -> reading: add book icon for that in wishlist section; and from reading -> to wishlist: add pin icon for that in reading section.
+
+----------
+16-02-26 12:55
+----------
+Functionality is fine, but is there some more suitable icon for the floppy disk? It looks too colorful, to modern compared to the rest of the style. Any icon that indicates moving back to saved section will work. Something like archive, library or files.
+
+----------
+16-02-26 13:03
+----------
+this icon doesn't work, I'm getting '?' there
+
+----------
+16-02-26 13:07
+----------
+Last couple of prompts were not logged to #file:prompt-log.md  what does that keep happening?

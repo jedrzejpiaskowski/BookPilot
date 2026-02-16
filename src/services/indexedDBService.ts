@@ -83,3 +83,27 @@ export async function removeBook(bookKey: string): Promise<void> {
     request.onsuccess = () => resolve()
   })
 }
+export async function updateBookStatus(
+  bookKey: string,
+  status: 'saved' | 'wishlist' | 'reading'
+): Promise<void> {
+  const database = await initDB()
+  return new Promise((resolve, reject) => {
+    const transaction = database.transaction([STORE_NAME], 'readwrite')
+    const store = transaction.objectStore(STORE_NAME)
+    const getRequest = store.get(bookKey)
+
+    getRequest.onerror = () => reject(getRequest.error)
+    getRequest.onsuccess = () => {
+      const book = getRequest.result
+      if (book) {
+        book.status = status
+        const updateRequest = store.put(book)
+        updateRequest.onerror = () => reject(updateRequest.error)
+        updateRequest.onsuccess = () => resolve()
+      } else {
+        reject(new Error('Book not found'))
+      }
+    }
+  })
+}

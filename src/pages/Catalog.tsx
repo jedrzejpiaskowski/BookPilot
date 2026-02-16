@@ -33,6 +33,19 @@ export default function Catalog() {
     setSavedBooks((prevBooks) => prevBooks.filter((book) => book.key !== bookKey))
   }
 
+  const handleStatusChange = (bookKey: string, newStatus: 'saved' | 'wishlist' | 'reading') => {
+    setSavedBooks((prevBooks) =>
+      prevBooks.map((book) =>
+        book.key === bookKey ? { ...book, status: newStatus } : book
+      )
+    )
+  }
+
+  // Filter books by status
+  const savedBooksOnly = savedBooks.filter((book) => book.status !== 'wishlist' && book.status !== 'reading')
+  const wishlistBooks = savedBooks.filter((book) => book.status === 'wishlist')
+  const readingBooks = savedBooks.filter((book) => book.status === 'reading')
+
   return (
     <div className="content-section">
       <div className="catalog-container">
@@ -60,16 +73,69 @@ export default function Catalog() {
         )}
 
         {!isLoading && savedBooks.length > 0 && (
-          <div className="catalog-content">
-            <p className="catalog-count">{savedBooks.length} book{savedBooks.length !== 1 ? 's' : ''} in your collection</p>
-            <div className="catalog-grid">
-              {savedBooks.map((book) => (
-                <CatalogBookCard
-                  key={book.key}
-                  book={book}
-                  onRemove={handleRemoveBook}
-                />
-              ))}
+          <div className="catalog-layout">
+            {/* Main content - Saved books (2/3 width) */}
+            <div className="catalog-main">
+              <div className="catalog-section">
+                <h3 className="section-title">Saved Books</h3>
+                {savedBooksOnly.length === 0 ? (
+                  <p className="section-empty">No saved books yet</p>
+                ) : (
+                  <div className="section-grid">
+                    {savedBooksOnly.map((book) => (
+                      <CatalogBookCard
+                        key={book.key}
+                        book={book}
+                        onRemove={handleRemoveBook}
+                        onStatusChange={handleStatusChange}
+                      />
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Sidebar - Wishlist and Reading (1/3 width) */}
+            <div className="catalog-sidebar">
+              {/* Wishlist section */}
+              <div className="catalog-side-section">
+                <h3 className="side-section-title">Wishlist</h3>
+                {wishlistBooks.length === 0 ? (
+                  <p className="section-empty">No books in wishlist</p>
+                ) : (
+                  <div className="side-section-grid">
+                    {wishlistBooks.map((book) => (
+                      <CatalogBookCard
+                        key={book.key}
+                        book={book}
+                        onRemove={handleRemoveBook}
+                        onStatusChange={handleStatusChange}
+                        isMinimal={true}
+                      />
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {/* Reading section */}
+              <div className="catalog-side-section">
+                <h3 className="side-section-title">Reading</h3>
+                {readingBooks.length === 0 ? (
+                  <p className="section-empty">No books you're reading</p>
+                ) : (
+                  <div className="side-section-grid">
+                    {readingBooks.map((book) => (
+                      <CatalogBookCard
+                        key={book.key}
+                        book={book}
+                        onRemove={handleRemoveBook}
+                        onStatusChange={handleStatusChange}
+                        isMinimal={true}
+                      />
+                    ))}
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         )}
