@@ -102,6 +102,33 @@
   box-shadow: 0 4px 16px rgba(197, 149, 89, 0.15);
 }
 
+.clear-button {
+  padding: 1rem 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow);
+  color: var(--text-light);
+}
+
+.clear-button:hover {
+  border-color: var(--secondary);
+  color: var(--secondary);
+}
+
+.clear-button:active {
+  transform: scale(0.95);
+}
+
+.clear-icon {
+  font-size: 1.2em !important;
+}
+
 .search-button:disabled {
   background-color: #d4c4b0;
   border-color: #d4c4b0;

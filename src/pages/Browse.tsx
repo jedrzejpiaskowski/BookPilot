@@ -1,6 +1,7 @@
 import { useRef } from 'react'
 import type { Dispatch, SetStateAction } from 'react'
 import SearchIcon from '@mui/icons-material/Search'
+import ClearIcon from '@mui/icons-material/Clear'
 import type { SearchResponse } from '../api/openlibraryClient'
 import { searchResultLimit } from '../constants/search'
 import BookResultCard from '../components/BookResultCard'
@@ -54,6 +55,13 @@ export default function Browse({
     setPage(1)
   }
 
+  const handleClear = () => {
+    setInputValue('')
+    setActualSearchQuery('')
+    setPage(1)
+    setSearchType('general')
+  }
+
   const isSearchDisabled = loading || (Date.now() - lastSearchTimeRef.current) < SEARCH_COOLDOWN
 
   return (
@@ -82,7 +90,13 @@ export default function Browse({
             <option value="general">All fields</option>
             <option value="title">Title</option>
             <option value="author">Author</option>
-          </select>          <button className="search-button" onClick={handleSearch} disabled={isSearchDisabled}>
+          </select>          <button 
+            className="clear-button" 
+            onClick={handleClear}
+            title="Clear search"
+          >
+            <ClearIcon className="clear-icon" />
+          </button>          <button className="search-button" onClick={handleSearch} disabled={isSearchDisabled}>
             Search
           </button>
         </div>

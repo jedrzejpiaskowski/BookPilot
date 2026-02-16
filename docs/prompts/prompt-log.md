@@ -194,3 +194,23 @@ That's fine, but DO NOT change link color when hovered. Only decoration should b
 16-02-26 09:00
 ----------
 Try to determine if it's possible to use open library API to search for books but by providing author name. So if I input 'tolkien' I want to find Lord of the rings books, not some tolkien biography.
+
+----------
+16-02-26 09:02
+----------
+Yes
+
+----------
+16-02-26 09:09
+----------
+#file:Browse.tsx Add a small x icon (or something more suitable) button to clear search bar input, results and select default search type - all fields. Place the button before 'Search' button.
+
+----------
+16-02-26 09:17
+----------
+X Button is slightly smaller than 'Search' and the dropdown selection. I want all controls to have the same height.
+
+----------
+16-02-26 10:16
+----------
+#file:Navigation.tsx Similarly to home button, add suitable icons to all the buttons.
