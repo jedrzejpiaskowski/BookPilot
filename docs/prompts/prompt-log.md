@@ -1,4 +1,4 @@
-----------
+﻿----------
 09-02-26 14:32
 ----------
 Could you add an instruction file to the project specifying that each prompt I enter here should be saved (appended) to a file under docs/prompts in following format:
@@ -79,7 +79,7 @@ Adjust active nav-button style to add left, top and right border to indicate act
 Update the global page styles so that the main content background is no longer pure white.
 Replace it with a light warm beige tone resembling aged paper (very subtle, not yellow, not brown).
 
-Add a very subtle paper-like texture with extremely low contrast — it should be barely noticeable and only visible on close inspection.
+Add a very subtle paper-like texture with extremely low contrast â€” it should be barely noticeable and only visible on close inspection.
 
 The effect should feel elegant and minimal, not vintage-heavy or sepia.
 Avoid strong gradients, stains, or obvious noise patterns.
@@ -375,6 +375,13 @@ Can't you reuse the some snackbar component that was used here? Why do we need n
 ----------
 Add a bit more detailed overview of the project now that most of it is implemented. Take a look at all component details and commit history if you need to.
 
+----------
+16-02-26 20:25
+----------
+When user clicks #file:BookResultCard.tsx I want a dialog message to appear as an overlay that will show all relevant book details. It should have X button in the top right to close it. Show all useful information that might not fit in the main list, but skip technical info.
 
-
+----------
+16-02-26 20:30
+----------
+Nice, but make sure dialog appears when I click anywhere in the card EXCEPT for start icon that saves it to collection. Currently when I just want to save it still opens up dialog.
 
