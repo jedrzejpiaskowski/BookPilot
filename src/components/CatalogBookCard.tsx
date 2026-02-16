@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import type { SavedBook } from '../services/indexedDBService'
-import { getCoverUrl } from '../api/openlibraryClient'
+import { useCoverImage } from '../hooks/useCoverImage'
 import { removeBook, updateBookStatus } from '../services/indexedDBService'
 
 interface CatalogBookCardProps {
@@ -52,6 +52,7 @@ export default function CatalogBookCard({
   if (isMinimal) {
     // Minimal display: cover and title only, for sidebar sections
     const coverId = book.cover_i
+    const coverUrl = useCoverImage(coverId, 'S')
 
     return (
       <div
@@ -63,8 +64,8 @@ export default function CatalogBookCard({
         }}
       >
         <div className="minimal-book-cover">
-          {coverId ? (
-            <img src={getCoverUrl(coverId, 'S')} alt={book.title} loading="lazy" />
+          {coverUrl ? (
+            <img src={coverUrl} alt={book.title} loading="lazy" />
           ) : (
             <div className="minimal-cover-placeholder">No cover</div>
           )}
@@ -123,6 +124,7 @@ export default function CatalogBookCard({
 
   // Full display for Saved Books section
   const coverId = book.cover_i
+  const coverUrl = useCoverImage(coverId, 'M')
   const author = book.author_name?.join(', ') ?? 'Unknown author'
   const publishYear = book.first_publish_year ?? 'Unknown year'
   const genre = book.subject?.slice(0, 2).join(', ')
@@ -145,8 +147,8 @@ export default function CatalogBookCard({
       }}
     >
       <div className="book-cover">
-        {coverId ? (
-          <img src={getCoverUrl(coverId, 'M')} alt={book.title} loading="lazy" />
+        {coverUrl ? (
+          <img src={coverUrl} alt={book.title} loading="lazy" />
         ) : (
           <div className="cover-placeholder">No cover</div>
         )}

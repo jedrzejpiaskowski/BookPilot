@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import Snackbar from '@mui/material/Snackbar'
 import Alert from '@mui/material/Alert'
 import type { BookResult } from '../api/openlibraryClient'
-import { getCoverUrl } from '../api/openlibraryClient'
+import { useCoverImage } from '../hooks/useCoverImage'
 import { saveBook, isBookSaved, removeBook } from '../services/indexedDBService'
 
 interface BookResultCardProps {
@@ -50,6 +50,7 @@ export default function BookResultCard({ book }: BookResultCardProps) {
   }
 
   const coverId = book.cover_i
+  const coverUrl = useCoverImage(coverId, 'M')
   const author = book.author_name?.join(', ') ?? 'Unknown author'
   const publishYear = book.first_publish_year ?? 'Unknown year'
   const genre = book.subject?.slice(0, 2).join(', ')
@@ -59,9 +60,9 @@ export default function BookResultCard({ book }: BookResultCardProps) {
     <>
     <article className="book-result-card">
       <div className="book-cover">
-        {coverId ? (
+        {coverUrl ? (
           <img
-            src={getCoverUrl(coverId, 'M')}
+            src={coverUrl}
             alt={book.title}
             loading="lazy"
           />

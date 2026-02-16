@@ -289,3 +289,13 @@ Can you implement drag & drop functionality so that users can move books in betw
 16-02-26 13:13
 ----------
 Currently books cannot be dragged to section that's empty. Meaning if I have no books in whishlist, I have to add one first with a button and only then I can drag more books there. It should be possible to drag books to empty sections.
+
+----------
+16-02-26 13:19
+----------
+I noticed that books covered are fetched every time. Can we do some sort of caching to improve that? It should be resued across all app, so each component using covers should utilize caching mechanism.
+
+----------
+16-02-26 13:22
+----------
+There's still some delay when displaying covers, are you sure they're cached? Is there a way to verify that?
