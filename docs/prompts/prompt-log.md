@@ -214,3 +214,13 @@ X Button is slightly smaller than 'Search' and the dropdown selection. I want al
 16-02-26 10:16
 ----------
 #file:Navigation.tsx Similarly to home button, add suitable icons to all the buttons.
+
+----------
+16-02-26 10:22
+----------
+I noticed that site is not responsive, it looks bad on smaller screens: menu button do not fit on the screen, as well as book card components. Can you improve that? For menu you can hide text and display icons only on smaller screens. If possible, DO NOT change styling for higher resolutions, keep it as is, just make it more responsive using @media rules for smaller screens.
+
+----------
+16-02-26 10:25
+----------
+That's better, but magnifying glass icon is off, displayed below the actual search bar. Fix that.

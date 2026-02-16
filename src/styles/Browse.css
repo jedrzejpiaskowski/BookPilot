@@ -138,6 +138,70 @@
   transform: none;
 }
 
+@media (max-width: 768px) {
+  .search-wrapper {
+    flex-wrap: wrap;
+    max-width: 100%;
+  }
+
+  .search-input {
+    padding: 0.75rem 1.25rem 0.75rem 3rem;
+    font-size: 1em;
+  }
+
+  .search-icon {
+    top: 0.8rem;
+    left: 1.25rem;
+    font-size: 1.3rem !important;
+  }
+
+  .search-button {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.95em;
+  }
+
+  .search-type-select {
+    padding: 0.75rem 1rem;
+    font-size: 0.95em;
+  }
+
+  .clear-button {
+    padding: 0.75rem 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .search-wrapper {
+    gap: 0.5rem;
+  }
+
+  .search-input {
+    padding: 0.6rem 1rem 0.6rem 2.8rem;
+    font-size: 0.95em;
+  }
+
+  .search-icon {
+    top: 0.8rem;
+    left: 1rem;
+    font-size: 1.2rem !important;
+  }
+
+  .search-button,
+  .search-type-select,
+  .clear-button {
+    padding: 0.6rem 0.75rem;
+    font-size: 0.9em;
+  }
+
+  .search-button {
+    white-space: normal;
+  }
+
+  .clear-icon {
+    font-size: 1rem !important;
+  }
+}
+
 /* Search Results Styles */
 .search-results {
   width: 100%;
@@ -328,14 +392,75 @@
   font-weight: 600;
 }
 
+@media (max-width: 768px) {
+  .results-grid {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 0.75rem;
+  }
+
+  .book-result-card {
+    padding: 0.75rem;
+  }
+
+  .book-title {
+    font-size: 0.95em;
+  }
+
+  .book-author,
+  .book-year,
+  .book-detail {
+    font-size: 0.85em;
+  }
+}
+
 @media (max-width: 480px) {
+  .results-grid {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+
+  .browse-container {
+    padding: 0 0.5rem;
+  }
+
+  .results-container {
+    padding: 0.75rem 0;
+  }
+
+  .results-count {
+    font-size: 0.95em;
+    margin-bottom: 0.75rem;
+  }
+
   .book-result-card {
     flex-direction: column;
     align-items: stretch;
+    padding: 0.75rem;
+    gap: 0.75rem;
   }
 
   .book-cover {
     width: 100%;
-    height: 180px;
+    height: 150px;
+  }
+
+  .book-title {
+    font-size: 1em;
+  }
+
+  .book-author,
+  .book-year,
+  .book-detail {
+    font-size: 0.85em;
+  }
+
+  .save-button {
+    min-width: 40px;
+    height: 40px;
+  }
+
+  .pagination-button {
+    padding: 0.5rem 1rem;
+    font-size: 0.9em;
   }
 }
