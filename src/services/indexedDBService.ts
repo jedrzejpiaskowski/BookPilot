@@ -2,6 +2,9 @@ import type { BookResult } from '../api/openlibraryClient'
 
 export interface SavedBook extends BookResult {
   savedAt: number // Timestamp when book was saved
+  status?: 'saved' | 'wishlist' | 'reading' // Book status
+  rating?: number // Rating from 0-5
+  progress?: number // Reading progress from 0-100
 }
 
 const DB_NAME = 'BookPilotDB'
@@ -120,6 +123,28 @@ export async function updateBookRating(bookKey: string, rating: number): Promise
       const book = getRequest.result
       if (book) {
         book.rating = Math.max(0, Math.min(5, rating)) // Clamp between 0-5
+        const updateRequest = store.put(book)
+        updateRequest.onerror = () => reject(updateRequest.error)
+        updateRequest.onsuccess = () => resolve()
+      } else {
+        reject(new Error('Book not found'))
+      }
+    }
+  })
+}
+
+export async function updateBookProgress(bookKey: string, progress: number): Promise<void> {
+  const database = await initDB()
+  return new Promise((resolve, reject) => {
+    const transaction = database.transaction([STORE_NAME], 'readwrite')
+    const store = transaction.objectStore(STORE_NAME)
+    const getRequest = store.get(bookKey)
+
+    getRequest.onerror = () => reject(getRequest.error)
+    getRequest.onsuccess = () => {
+      const book = getRequest.result
+      if (book) {
+        book.progress = Math.max(0, Math.min(100, progress)) // Clamp between 0-100
         const updateRequest = store.put(book)
         updateRequest.onerror = () => reject(updateRequest.error)
         updateRequest.onsuccess = () => resolve()

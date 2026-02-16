@@ -9,6 +9,15 @@ export default function Rate() {
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
+  // Helper function to sort books
+  const sortBooksByProgressAndRating = (books: SavedBook[]): SavedBook[] => {
+    return [...books].sort((a, b) => {
+      const progressDiff = (b.progress ?? 0) - (a.progress ?? 0)
+      if (progressDiff !== 0) return progressDiff
+      return (b.rating ?? 0) - (a.rating ?? 0)
+    })
+  }
+
   useEffect(() => {
     loadReadingBooks()
   }, [])
@@ -20,13 +29,8 @@ export default function Rate() {
       const books = await getAllSavedBooks()
       // Filter to only books with 'reading' status
       const reading = books.filter((book) => book.status === 'reading')
-      // Sort by rating (highest first), then by saved date (newest first)
-      reading.sort((a, b) => {
-        const ratingDiff = (b.rating ?? 0) - (a.rating ?? 0)
-        if (ratingDiff !== 0) return ratingDiff
-        return b.savedAt - a.savedAt
-      })
-      setReadingBooks(reading)
+      const sorted = sortBooksByProgressAndRating(reading)
+      setReadingBooks(sorted)
     } catch (err) {
       console.error('Failed to load reading books:', err)
       setError('Failed to load your reading list')
@@ -36,17 +40,21 @@ export default function Rate() {
   }
 
   const handleRatingChange = (bookKey: string, rating: number) => {
-    setReadingBooks((prev) =>
-      prev
-        .map((book) =>
-          book.key === bookKey ? { ...book, rating } : book
-        )
-        .sort((a, b) => {
-          const ratingDiff = (b.rating ?? 0) - (a.rating ?? 0)
-          if (ratingDiff !== 0) return ratingDiff
-          return b.savedAt - a.savedAt
-        })
-    )
+    setReadingBooks((prev) => {
+      const updated = prev.map((book) =>
+        book.key === bookKey ? { ...book, rating } : book
+      )
+      return sortBooksByProgressAndRating(updated)
+    })
+  }
+
+  const handleProgressChange = (bookKey: string, progress: number) => {
+    setReadingBooks((prev) => {
+      const updated = prev.map((book) =>
+        book.key === bookKey ? { ...book, progress } : book
+      )
+      return sortBooksByProgressAndRating(updated)
+    })
   }
 
   const handleRemove = (bookKey: string) => {
@@ -57,7 +65,7 @@ export default function Rate() {
     <div className="content-section">
       <div className="rate-container">
         <h2 className="rate-title">Rate Your Reading</h2>
-        <p className="rate-subtitle">Share your thoughts on books you're reading</p>
+        <p className="rate-subtitle">Track your progress and rate books as you read</p>
 
         {isLoading && (
           <div className="rate-status">
@@ -87,6 +95,7 @@ export default function Rate() {
                 key={book.key}
                 book={book}
                 onRatingChange={handleRatingChange}
+                onProgressChange={handleProgressChange}
                 onRemove={handleRemove}
               />
             ))}

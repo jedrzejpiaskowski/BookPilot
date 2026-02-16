@@ -1,22 +1,29 @@
 import { useState } from 'react'
+import Snackbar from '@mui/material/Snackbar'
+import Alert from '@mui/material/Alert'
 import type { SavedBook } from '../services/indexedDBService'
 import { useCoverImage } from '../hooks/useCoverImage'
-import { updateBookRating, removeBook } from '../services/indexedDBService'
+import { updateBookRating, removeBook, updateBookProgress } from '../services/indexedDBService'
 
 interface RatingBookCardProps {
   book: SavedBook
   onRatingChange?: (bookKey: string, rating: number) => void
+  onProgressChange?: (bookKey: string, progress: number) => void
   onRemove?: (bookKey: string) => void
 }
 
 export default function RatingBookCard({
   book,
   onRatingChange,
+  onProgressChange,
   onRemove,
 }: RatingBookCardProps) {
   const [rating, setRating] = useState<number>(book.rating ?? 0)
+  const [progress, setProgress] = useState<number>(book.progress ?? 0)
   const [isUpdating, setIsUpdating] = useState(false)
   const [isRemoving, setIsRemoving] = useState(false)
+  const [toastOpen, setToastOpen] = useState(false)
+  const [toastMessage, setToastMessage] = useState('')
 
   const coverUrl = useCoverImage(book.cover_i, 'M')
   const author = book.author_name?.join(', ') ?? 'Unknown author'
@@ -38,6 +45,22 @@ export default function RatingBookCard({
     }
   }
 
+  const handleProgressChange = async () => {
+    try {
+      await updateBookProgress(book.key, progress)
+      if (onProgressChange) {
+        onProgressChange(book.key, progress)
+      }
+      // Show completion toast when progress reaches 100%
+      if (progress === 100) {
+        setToastMessage(`Congrats! You've completed '${book.title}'! Keep going!`)
+        setToastOpen(true)
+      }
+    } catch (error) {
+      console.error('Failed to update progress:', error)
+    }
+  }
+
   const handleRemove = async () => {
     if (isRemoving) return
 
@@ -54,6 +77,7 @@ export default function RatingBookCard({
   }
 
   return (
+    <>
     <article className={`rating-book-card ${
       rating === 5 ? 'rating-five-stars' : rating === 4 ? 'rating-four-stars' : ''
     }`}>
@@ -65,8 +89,41 @@ export default function RatingBookCard({
         )}
       </div>
       <div className="rating-book-info">
-        <h3 className="rating-book-title">{book.title}</h3>
+        <div className="rating-book-header">
+          <h3 className="rating-book-title">{book.title}</h3>
+          <button
+            className="remove-from-reading"
+            onClick={handleRemove}
+            disabled={isRemoving}
+            title="Remove from reading"
+          >
+            ✕
+          </button>
+        </div>
         <p className="rating-book-author">{author}</p>
+
+        {/* Reading Progress Control */}
+        <div className="progress-control">
+          <div className="progress-header">
+            <label htmlFor={`progress-${book.key}`} className="progress-label">
+              Progress
+            </label>
+            <span className="progress-value">{progress}%</span>
+          </div>
+          <input
+            id={`progress-${book.key}`}
+            type="range"
+            min="0"
+            max="100"
+            step="10"
+            value={progress}
+            onChange={(e) => setProgress(Number(e.target.value))}
+            onMouseUp={handleProgressChange}
+            onTouchEnd={handleProgressChange}
+            className="progress-slider"
+            style={{ '--progress': `${progress}%` } as React.CSSProperties}
+          />
+        </div>
 
         {/* Star Rating System */}
         <div className="star-rating">
@@ -83,22 +140,30 @@ export default function RatingBookCard({
             </button>
           ))}
         </div>
-
-        {/* Rating display */}
-        {rating > 0 && (
-          <p className="rating-display">{rating.toFixed(1)}/5</p>
-        )}
-
-        {/* Remove button */}
-        <button
-          className="remove-from-reading"
-          onClick={handleRemove}
-          disabled={isRemoving}
-          title="Remove from reading"
-        >
-          ✕ Remove
-        </button>
       </div>
     </article>
+    <Snackbar
+        open={toastOpen}
+        autoHideDuration={4000}
+        onClose={() => setToastOpen(false)}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+      >
+        <Alert
+          onClose={() => setToastOpen(false)}
+          severity="success"
+          sx={{
+            width: '100%',
+            background: 'linear-gradient(135deg, #d4a574 0%, #c59559 100%)',
+            color: '#1a1a1a',
+            fontFamily: "'Lora', serif",
+            fontWeight: 500,
+            boxShadow: '0 8px 24px rgba(0, 0, 0, 0.25), 0 0 20px rgba(212, 165, 116, 0.4)',
+            border: '1px solid rgba(255, 255, 255, 0.2)',
+          }}
+        >
+          {toastMessage}
+        </Alert>
+      </Snackbar>
+    </>
   )
 }

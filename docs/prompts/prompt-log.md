@@ -315,4 +315,61 @@ Now let's render all books that have a 'reading' status in #file:Rate.tsx view. 
 ----------
 I want to highlight books with top 5/5 rating. Add some special distinction for them like golden border or some subtle animation. Must be elegant yet inidicating unique quality. Something similar should be done for 4/5 rating, but subdued accordingly. Books with rating 0-3 will look the same.
 
+----------
+16-02-26 19:00
+----------
+Modify RatingBookCard component and styling so that cover is dispalyed with correct ratio on the left and the rest of the info on the right within rating card.
+
+----------
+16-02-26 19:18
+----------
+RatingBookCard styling is still not quite right. It can be very similar to what I have in CatalogBookCard: move the 'Remove' button to top right. Also remove the numeric rating value, stars are enough.
+
+----------
+16-02-26 19:26
+----------
+I am not too happy about 4 and 5 star rating animation. I want to achieve effect similar to this: https://codepen.io/deepak_96/pen/ExNLEpY but with golden border. The distinction between 4 and 5 style can be as simple as thicker border for 5-star rating. DO NOT change the rest of the styling, I only want golden border animation.
+
+----------
+16-02-26 19:35
+----------
+I want users to be able to save progress of books they are reading. Add a progress proprety to the book and progress control to the RatingBookCard above the rating control. It should be a progressbar/stepper with 10% increment. On control release progress is saved.
+
+----------
+16-02-26 19:41
+----------
+Nice, but progress is visually indicated only by the handle - can you also color the done/read part? Meaning If user sets progress to 60%, then 60% part of the slider would be colored and remainiging 40% empty like it is now.
+
+----------
+16-02-26 19:43
+----------
+Great, now only change the slider height from 6 to 5 px and slightly decrease the size of slider handler.
+
+----------
+16-02-26 19:47
+----------
+Sort books in this component by progress and then by rating
+
+----------
+16-02-26 19:49
+----------
+Ok now I want the sorting to be dynamic. I can see books getting reordered only on page refresh, it should be happening automatically.
+
+----------
+16-02-26 19:56
+----------
+Adjust this subtitle a bit so it describes better what user can do in tihs component. Description should be brief.
+
+----------
+16-02-26 19:58
+----------
+When user sets book's progress to 100% I want to display a golden toast notification that says: 'Congrats! You've completed 'X'! Keep going!' Where X is obviously title of the book.
+
+----------
+16-02-26 20:02
+----------
+Can't you reuse the some snackbar component that was used here? Why do we need new Toast component that does very similar thing?
+
+
+
 
