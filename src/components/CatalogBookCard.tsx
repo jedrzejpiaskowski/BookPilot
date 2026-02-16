@@ -8,6 +8,8 @@ interface CatalogBookCardProps {
   onRemove: (bookKey: string) => void
   onStatusChange?: (bookKey: string, status: 'saved' | 'wishlist' | 'reading') => void
   isMinimal?: boolean
+  draggable?: boolean
+  onDragStart?: (e: React.DragEvent<HTMLDivElement>) => void
 }
 
 export default function CatalogBookCard({
@@ -52,7 +54,14 @@ export default function CatalogBookCard({
     const coverId = book.cover_i
 
     return (
-      <div className="catalog-book-card-minimal">
+      <div
+        className="catalog-book-card-minimal"
+        draggable={true}
+        onDragStart={(e) => {
+          e.dataTransfer.effectAllowed = 'move'
+          e.dataTransfer.setData('application/json', JSON.stringify({ key: book.key, status: book.status }))
+        }}
+      >
         <div className="minimal-book-cover">
           {coverId ? (
             <img src={getCoverUrl(coverId, 'S')} alt={book.title} loading="lazy" />
@@ -127,7 +136,14 @@ export default function CatalogBookCard({
   })
 
   return (
-    <article className="catalog-book-card">
+    <article
+      className="catalog-book-card"
+      draggable={true}
+      onDragStart={(e) => {
+        e.dataTransfer.effectAllowed = 'move'
+        e.dataTransfer.setData('application/json', JSON.stringify({ key: book.key, status: book.status }))
+      }}
+    >
       <div className="book-cover">
         {coverId ? (
           <img src={getCoverUrl(coverId, 'M')} alt={book.title} loading="lazy" />

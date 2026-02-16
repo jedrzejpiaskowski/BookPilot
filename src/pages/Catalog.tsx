@@ -41,6 +41,32 @@ export default function Catalog() {
     )
   }
 
+  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault()
+    e.dataTransfer.dropEffect = 'move'
+  }
+
+  const handleDrop = (targetStatus: 'saved' | 'wishlist' | 'reading') => async (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault()
+    
+    try {
+      const data = e.dataTransfer.getData('application/json')
+      if (data) {
+        const { key, status } = JSON.parse(data)
+        
+        // Only update if status changed
+        if (status !== targetStatus) {
+          // Import the function dynamically to avoid circular dependencies
+          const { updateBookStatus } = await import('../services/indexedDBService')
+          await updateBookStatus(key, targetStatus)
+          handleStatusChange(key, targetStatus)
+        }
+      }
+    } catch (error) {
+      console.error('Failed to move book:', error)
+    }
+  }
+
   // Filter books by status
   const savedBooksOnly = savedBooks.filter((book) => book.status !== 'wishlist' && book.status !== 'reading')
   const wishlistBooks = savedBooks.filter((book) => book.status === 'wishlist')
@@ -78,20 +104,24 @@ export default function Catalog() {
             <div className="catalog-main">
               <div className="catalog-section">
                 <h3 className="section-title">Saved Books</h3>
-                {savedBooksOnly.length === 0 ? (
-                  <p className="section-empty">No saved books yet</p>
-                ) : (
-                  <div className="section-grid">
-                    {savedBooksOnly.map((book) => (
+                <div
+                  className="section-grid"
+                  onDragOver={handleDragOver}
+                  onDrop={handleDrop('saved')}
+                >
+                  {savedBooksOnly.length === 0 ? (
+                    <p className="section-empty">No saved books yet</p>
+                  ) : (
+                    savedBooksOnly.map((book) => (
                       <CatalogBookCard
                         key={book.key}
                         book={book}
                         onRemove={handleRemoveBook}
                         onStatusChange={handleStatusChange}
                       />
-                    ))}
-                  </div>
-                )}
+                    ))
+                  )}
+                </div>
               </div>
             </div>
 
@@ -100,11 +130,15 @@ export default function Catalog() {
               {/* Wishlist section */}
               <div className="catalog-side-section">
                 <h3 className="side-section-title">Wishlist</h3>
-                {wishlistBooks.length === 0 ? (
-                  <p className="section-empty">No books in wishlist</p>
-                ) : (
-                  <div className="side-section-grid">
-                    {wishlistBooks.map((book) => (
+                <div
+                  className="side-section-grid"
+                  onDragOver={handleDragOver}
+                  onDrop={handleDrop('wishlist')}
+                >
+                  {wishlistBooks.length === 0 ? (
+                    <p className="section-empty">No books in wishlist</p>
+                  ) : (
+                    wishlistBooks.map((book) => (
                       <CatalogBookCard
                         key={book.key}
                         book={book}
@@ -112,19 +146,23 @@ export default function Catalog() {
                         onStatusChange={handleStatusChange}
                         isMinimal={true}
                       />
-                    ))}
-                  </div>
-                )}
+                    ))
+                  )}
+                </div>
               </div>
 
               {/* Reading section */}
               <div className="catalog-side-section">
                 <h3 className="side-section-title">Reading</h3>
-                {readingBooks.length === 0 ? (
-                  <p className="section-empty">No books you're reading</p>
-                ) : (
-                  <div className="side-section-grid">
-                    {readingBooks.map((book) => (
+                <div
+                  className="side-section-grid"
+                  onDragOver={handleDragOver}
+                  onDrop={handleDrop('reading')}
+                >
+                  {readingBooks.length === 0 ? (
+                    <p className="section-empty">No books you're reading</p>
+                  ) : (
+                    readingBooks.map((book) => (
                       <CatalogBookCard
                         key={book.key}
                         book={book}
@@ -132,9 +170,9 @@ export default function Catalog() {
                         onStatusChange={handleStatusChange}
                         isMinimal={true}
                       />
-                    ))}
-                  </div>
-                )}
+                    ))
+                  )}
+                </div>
               </div>
             </div>
           </div>

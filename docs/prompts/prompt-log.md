@@ -279,3 +279,13 @@ this icon doesn't work, I'm getting '?' there
 16-02-26 13:07
 ----------
 Last couple of prompts were not logged to #file:prompt-log.md  what does that keep happening?
+
+----------
+16-02-26 13:10
+----------
+Can you implement drag & drop functionality so that users can move books in between 3 sections and change books state?
+
+----------
+16-02-26 13:13
+----------
+Currently books cannot be dragged to section that's empty. Meaning if I have no books in whishlist, I have to add one first with a button and only then I can drag more books there. It should be possible to drag books to empty sections.

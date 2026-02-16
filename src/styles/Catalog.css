@@ -1,5 +1,5 @@
 .catalog-container {
-  padding: 20px;
+  padding: 0;
   max-width: 1400px;
   margin: 0 auto;
 }
@@ -115,6 +115,14 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: 10px;
+}
+
+/* Drag and drop feedback */
+.section-grid.drag-over,
+.side-section-grid.drag-over {
+  background-color: rgba(212, 165, 116, 0.1);
+  border-radius: 6px;
+  transition: background-color 0.2s ease;
 }
 
 .section-empty {
@@ -472,7 +480,7 @@
 /* Mobile breakpoint */
 @media (max-width: 480px) {
   .catalog-container {
-    padding: 12px;
+    padding: 0.25rem;
   }
 
   .catalog-title {
