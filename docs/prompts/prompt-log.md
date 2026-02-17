@@ -395,3 +395,17 @@ Implement book count badges in navigation menu. Show numbers of books that will 
 ----------
 That's fine, but can't this be improved somehow? Loading counts every 2 seconds doesn't seem optimal. I'd rather count loading is triggered whenever books are saved to collection or status is changed.
 
+----------
+17-02-26 19:50
+----------
+I want to add some basic stats to #file:Home.tsx  page like:
+-Total books saved/in reading/completed
+-Average rating of completed books
+-Books with 100% progress
+
+----------
+17-02-26 19:55
+----------
+It looks nice, just remove '100% Progress' card - it's exactly the same stat as 'Completed' isn't it?
+
+

@@ -265,6 +265,109 @@
   text-decoration: underline;
 }
 
+/* Statistics Styles */
+.stats-loading {
+  text-align: center;
+  padding: 2rem;
+  color: var(--text-light);
+}
+
+.stats-container {
+  margin: 2rem 0;
+  padding: 2rem;
+  background-color: rgba(218, 165, 32, 0.05);
+  border-radius: 8px;
+  border: 1px solid rgba(218, 165, 32, 0.2);
+}
+
+.stats-title {
+  margin: 0 0 1.5rem 0;
+  color: var(--primary);
+  font-size: 1.5em;
+  text-align: center;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1.5rem;
+}
+
+.stat-card {
+  background-color: #fff;
+  padding: 1.5rem 1rem;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.stat-card.stat-highlight {
+  background: linear-gradient(135deg, rgba(218, 165, 32, 0.1) 0%, rgba(218, 165, 32, 0.05) 100%);
+  border: 2px solid rgba(218, 165, 32, 0.3);
+}
+
+.stat-value {
+  font-size: 2.5em;
+  font-weight: 700;
+  color: var(--secondary);
+  font-family: 'Playfair Display', serif;
+  margin-bottom: 0.5rem;
+  line-height: 1;
+}
+
+.stat-highlight .stat-value {
+  color: goldenrod;
+}
+
+.stat-stars {
+  font-size: 0.8em;
+  margin-left: 0.2rem;
+  color: goldenrod;
+}
+
+.stat-label {
+  font-size: 0.9em;
+  color: var(--text-light);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.home-links {
+  margin-top: 2rem;
+}
+
+@media (max-width: 768px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .stat-card {
+    padding: 1rem 0.75rem;
+  }
+
+  .stat-value {
+    font-size: 2em;
+  }
+
+  .stat-label {
+    font-size: 0.8em;
+  }
+}
+
+@media (max-width: 480px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 main {
   width: 100%;
 }
