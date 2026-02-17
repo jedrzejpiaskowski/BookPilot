@@ -6,17 +6,20 @@ A modern React application for managing your reading plans and tracking reading 
 
 BookPilot is a personal book reading planner with a clean, intuitive interface. It helps you discover, organize, and track books with multiple dedicated sections:
 
-- **Browse** - Search for books by title or author using the OpenLibrary API with paginated results (9 books per page). Features debounced search input with explicit triggering via Enter key or button click to prevent accidental searches. Cover images are cached for improved performance.
+- **Browse** - Search by title, author, or all fields with paginated results (9 books per page). Searches are deliberate (Enter or button) with cooldown protection. Result cards include save toggles and a details dialog with author info; covers and author photos are cached for faster repeat views.
 
-- **Catalog** - Organize your books into three custom collections: Saved (books to read), Wishlist (books you want later), and Reading (currently reading). Supports drag-and-drop functionality for easy status management. Each book displays a save timestamp showing when it was added to your collection.
+- **Catalog** - Organize books into Saved, Wishlist, and Reading collections with drag-and-drop status changes. Includes compact cards for side lists and save timestamps for each entry.
 
-- **Rate** - Track reading progress and rate completed books. Features include a 10% increment progress slider with visual fill indicator (golden for completed, gray for remaining), a 5-star rating system, and automatic sorting by progress and rating. Special styling highlights 5-star books (golden 3px border with glow) and 4-star books (2px border with subtle glow). Complete a book and receive a celebratory golden toast notification.
+- **Rate** - Track reading progress and rate books with a 10% increment slider and 5-star system. Lists auto-sort by progress then rating, with distinct styling for 4- and 5-star titles and a completion toast at 100%.
+
+- **Home** - Shows quick reading statistics like totals, reading status counts, completed books, and average rating for completed titles.
 
 **Design & UX:**
 - Elegant serif typography (Playfair Display for headers, Lora for body text) with a warm beige background resembling aged paper
 - Responsive layout that adapts to mobile, tablet, and desktop screens
 - Smooth transitions and animations for page reordering when books are rated or progress changes
 - Toast notifications with Material-UI Snackbar for user actions (save, remove, completion)
+- Navigation includes book count badges for Catalog and Rate
 
 All data is stored locally in your browser using IndexedDB, ensuring privacy and offline accessibility.
 
