@@ -37,6 +37,13 @@
   padding: 24px !important;
 }
 
+.details-main-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
 .details-layout {
   display: flex;
   gap: 20px;
@@ -140,6 +147,116 @@
 .save-button-large:disabled {
   opacity: 0.6;
   cursor: not-allowed;
+}
+
+/* Author Section Styles */
+.author-section {
+  border-left: 2px solid var(--border);
+  padding-left: 20px;
+}
+
+.author-section-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--primary);
+  font-family: 'Playfair Display', serif;
+  margin: 0 0 16px 0;
+}
+
+.author-loading,
+.author-unavailable {
+  color: #999;
+  font-size: 14px;
+  font-style: italic;
+  padding: 20px 0;
+}
+
+.author-details {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.author-photo {
+  width: 100%;
+  max-width: 150px;
+  margin: 0 auto;
+}
+
+.author-photo img {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.author-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.author-name {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--primary);
+  font-family: 'Playfair Display', serif;
+  margin: 0;
+}
+
+.author-dates {
+  font-size: 13px;
+  color: #666;
+  font-style: italic;
+  margin: 0;
+}
+
+.author-bio {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+  margin: 8px 0 0 0;
+  font-family: 'Lora', serif;
+}
+
+.author-bio-toggle {
+  background: none;
+  border: none;
+  color: var(--secondary);
+  font-weight: 600;
+  margin-left: 6px;
+  padding: 0;
+  cursor: pointer;
+  font-family: 'Lora', serif;
+}
+
+.author-bio-toggle:hover {
+  text-decoration: underline;
+}
+
+.author-alternate {
+  font-size: 13px;
+  color: #666;
+  margin: 4px 0 0 0;
+}
+
+.author-alternate strong {
+  color: #333;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .details-main-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .author-section {
+    border-left: none;
+    border-top: 2px solid var(--border);
+    padding-left: 0;
+    padding-top: 20px;
+  }
 }
 
 /* Mobile adjustments */

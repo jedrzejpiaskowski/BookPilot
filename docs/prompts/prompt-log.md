@@ -408,4 +408,30 @@ I want to add some basic stats to #file:Home.tsx  page like:
 ----------
 It looks nice, just remove '100% Progress' card - it's exactly the same stat as 'Completed' isn't it?
 
+----------
+17-02-26 20:00
+----------
+In #file:BookResultCard.tsx  this dialog content is able to display a lot of data, but most of the books in open library API do not have them, so it looks kind of empty. I would like to extend this dialog (perhaps display in grid, next to the book) to show author data. Extend #file:openlibraryClient.ts to fetch author of the book, get the picture and display basic information. If book has more than 1 author, take just the first one. Use https://openlibrary.org/dev/docs/api/authors if you need to investigate that API.
+
+----------
+17-02-26 20:08
+----------
+Works fine, but similarly to what is done for books covers #file:useCoverImage.ts #file:coverCache.ts I'd like authors images to also be cached so that I don't get a delay.
+
+----------
+17-02-26 20:18
+----------
+It works good except for when author image could not be found in open library, than blank img is displayed. If image doesn't work properly it should not be displayed at all.
+
+----------
+17-02-26 20:37
+----------
+It's still the same, I suspect the thing is api returns image as successful 200 response, but in reality image is empty so it's saved to cache anyway. Before saving perform a check on blob - verify it's size and if type is not empty or ''. If it is skip saving and return undefined.
+
+----------
+17-02-26 20:44
+----------
+I noticed you are trimming author's bio length to 500. Change that to 300. Also I want to have ability to see the full bio, so if it's longer than 300 add inline 'Show more' button. Then after clicking and expanding there should be 'Hide' button too.
+
+
 
