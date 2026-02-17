@@ -4,7 +4,11 @@ import { getAllSavedBooks } from '../services/indexedDBService'
 import CatalogBookCard from '../components/CatalogBookCard'
 import '../styles/Catalog.css'
 
-export default function Catalog() {
+interface CatalogProps {
+  onCountsChange?: () => void
+}
+
+export default function Catalog({ onCountsChange }: CatalogProps) {
   const [savedBooks, setSavedBooks] = useState<SavedBook[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -31,6 +35,9 @@ export default function Catalog() {
 
   const handleRemoveBook = (bookKey: string) => {
     setSavedBooks((prevBooks) => prevBooks.filter((book) => book.key !== bookKey))
+    if (onCountsChange) {
+      onCountsChange()
+    }
   }
 
   const handleStatusChange = (bookKey: string, newStatus: 'saved' | 'wishlist' | 'reading') => {
@@ -39,6 +46,9 @@ export default function Catalog() {
         book.key === bookKey ? { ...book, status: newStatus } : book
       )
     )
+    if (onCountsChange) {
+      onCountsChange()
+    }
   }
 
   const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
@@ -60,6 +70,9 @@ export default function Catalog() {
           const { updateBookStatus } = await import('../services/indexedDBService')
           await updateBookStatus(key, targetStatus)
           handleStatusChange(key, targetStatus)
+          if (onCountsChange) {
+            onCountsChange()
+          }
         }
       }
     } catch (error) {

@@ -12,9 +12,10 @@ import '../styles/BookDetails.css'
 
 interface BookResultCardProps {
   book: BookResult
+  onSaveChange?: () => void
 }
 
-export default function BookResultCard({ book }: BookResultCardProps) {
+export default function BookResultCard({ book, onSaveChange }: BookResultCardProps) {
   const [isSaved, setIsSaved] = useState(false)
   const [isSaving, setIsSaving] = useState(false)
   const [toastOpen, setToastOpen] = useState(false)
@@ -44,6 +45,10 @@ export default function BookResultCard({ book }: BookResultCardProps) {
         setToastMessage(`Added "${trimmedTitle}" to your collection`)
       }
       setToastOpen(true)
+      // Notify parent to refresh counts
+      if (onSaveChange) {
+        onSaveChange()
+      }
     } catch (error) {
       console.error('Failed to save/remove book:', error)
     } finally {

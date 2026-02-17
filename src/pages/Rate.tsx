@@ -4,7 +4,11 @@ import { getAllSavedBooks } from '../services/indexedDBService'
 import RatingBookCard from '../components/RatingBookCard'
 import '../styles/Rate.css'
 
-export default function Rate() {
+interface RateProps {
+  onCountsChange?: () => void
+}
+
+export default function Rate({ onCountsChange }: RateProps) {
   const [readingBooks, setReadingBooks] = useState<SavedBook[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -59,6 +63,9 @@ export default function Rate() {
 
   const handleRemove = (bookKey: string) => {
     setReadingBooks((prev) => prev.filter((book) => book.key !== bookKey))
+    if (onCountsChange) {
+      onCountsChange()
+    }
   }
 
   return (

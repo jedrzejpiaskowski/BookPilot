@@ -21,6 +21,7 @@ type BrowseProps = {
   error: string | null
   searchType: 'title' | 'author' | 'general'
   setSearchType: Dispatch<SetStateAction<'title' | 'author' | 'general'>>
+  onCountsChange?: () => void
 }
 
 export default function Browse({
@@ -34,7 +35,8 @@ export default function Browse({
   loading,
   error,
   searchType,
-  setSearchType
+  setSearchType,
+  onCountsChange
 }: BrowseProps) {
   const lastSearchTimeRef = useRef(0)
 
@@ -122,7 +124,7 @@ export default function Browse({
               </p>
               <div className="results-grid">
                 {results.docs.map((book) => (
-                  <BookResultCard key={book.key} book={book} />
+                  <BookResultCard key={book.key} book={book} onSaveChange={onCountsChange} />
                 ))}
               </div>
               {results.docs.length >= searchResultLimit && (

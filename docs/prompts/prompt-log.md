@@ -385,3 +385,13 @@ When user clicks #file:BookResultCard.tsx I want a dialog message to appear as a
 ----------
 Nice, but make sure dialog appears when I click anywhere in the card EXCEPT for start icon that saves it to collection. Currently when I just want to save it still opens up dialog.
 
+----------
+17-02-26 19:38
+----------
+Implement book count badges in navigation menu. Show numbers of books that will be displated in each section, for example: Catalog (12) and Rate (3). Skip Browse section as results there are dynamic.
+
+----------
+17-02-26 19:42
+----------
+That's fine, but can't this be improved somehow? Loading counts every 2 seconds doesn't seem optimal. I'd rather count loading is triggered whenever books are saved to collection or status is changed.
+
