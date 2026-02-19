@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { getAllSavedBooks } from '../services/indexedDBService'
 
 export default function Home() {
@@ -95,21 +96,21 @@ export default function Home() {
 
       <div className="home-links">
         <p>
-          <a className="home-section-link" href="/browse">
+          <Link className="home-section-link" to="/browse">
             <strong>Browse</strong>
-          </a>
+          </Link>
           : search Open Library to explore titles, authors, and editions with rich results.
         </p>
         <p>
-          <a className="home-section-link" href="/catalog">
+          <Link className="home-section-link" to="/catalog">
             <strong>Catalog</strong>
-          </a>
+          </Link>
           : view and manage the books you've saved to your personal collection.
         </p>
         <p>
-          <a className="home-section-link" href="/rate">
+          <Link className="home-section-link" to="/rate">
             <strong>Rate</strong>
-          </a>
+          </Link>
           : keep track of your reading opinions and future ratings.
         </p>
       </div>
