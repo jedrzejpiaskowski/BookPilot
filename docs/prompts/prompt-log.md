@@ -433,5 +433,18 @@ It's still the same, I suspect the thing is api returns image as successful 200 
 ----------
 I noticed you are trimming author's bio length to 500. Change that to 300. Also I want to have ability to see the full bio, so if it's longer than 300 add inline 'Show more' button. Then after clicking and expanding there should be 'Hide' button too.
 
+----------
+19-02-26 10:00
+----------
+Can you change the app icon to a book?
 
+----------
+19-02-26 10:03
+----------
+I want more classic looking book and definitely not blue color
+
+----------
+19-02-26 10:05
+----------
+As per industry standard does #file:index.html need some updating? perhaps more descriptive (yet brief) title and some metadata?
 

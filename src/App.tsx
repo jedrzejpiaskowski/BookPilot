@@ -1,6 +1,6 @@
 import './App.css'
 import { useState, useEffect, useCallback } from 'react'
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { HashRouter, Routes, Route, Navigate } from 'react-router-dom'
 import Navigation from './components/Navigation'
 import Browse from './pages/Browse'
 import Catalog from './pages/Catalog'
@@ -78,9 +78,9 @@ function AppContent() {
 
 function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <AppContent />
-    </BrowserRouter>
+    </HashRouter>
   )
 }
 
