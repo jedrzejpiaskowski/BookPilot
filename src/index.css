@@ -1,12 +1,13 @@
 :root {
-  /* Modern Book-Inspired Color Palette */
-  --primary: #2c3e50;        /* Deep charcoal */
-  --secondary: #c59559;      /* Warm gold/bronze */
-  --accent: #e8f4f8;         /* Light sky blue */
-  --background: #fafaf8;     /* Warm off-white */
-  --text: #2c3e50;           /* Deep charcoal */
-  --text-light: #666666;     /* Medium gray */
-  --border: #e0ddd8;         /* Soft beige */
+  --primary: #2c3e50;
+  --secondary: #c59559;
+  --accent: #e8f4f8;
+  --background: #fafaf8;
+  --surface: #f8f6f1;
+  --surface-soft: #ffffff;
+  --text: #2c3e50;
+  --text-light: #666666;
+  --border: #e0ddd8;
   --shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 
   /* Typography */
@@ -14,16 +15,29 @@
   line-height: 1.6;
   font-weight: 400;
 
-  /* Color scheme */
   color-scheme: light;
   color: var(--text);
   background-color: var(--background);
 
-  /* Text rendering */
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+:root.theme-dark,
+body.theme-dark {
+  --primary: #f2e7d2;
+  --secondary: #d4a574;
+  --accent: #3b3127;
+  --background: #211b18;
+  --surface: #2d2521;
+  --surface-soft: #3e352d;
+  --text: #f2e7d2;
+  --text-light: #cfbea5;
+  --border: #6e5e52;
+  --shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+  color-scheme: dark;
 }
 
 a {
@@ -43,6 +57,7 @@ body {
   min-width: 320px;
   min-height: 100vh;
   background-color: var(--background);
+  color: var(--text);
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -72,7 +87,8 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: var(--surface-soft);
+  color: var(--text);
   cursor: pointer;
   transition: border-color 0.25s;
 }
@@ -81,18 +97,6 @@ button:hover {
 }
 button:focus,
 button:focus-visible {
-  /* outline: 4px auto -webkit-focus-ring-color; */
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+  outline: 2px solid color-mix(in srgb, var(--secondary) 65%, white);
+  outline-offset: 2px;
 }

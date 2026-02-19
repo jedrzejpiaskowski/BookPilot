@@ -1,6 +1,8 @@
 import './App.css'
 import { useState, useEffect, useCallback } from 'react'
 import { HashRouter, Routes, Route, Navigate } from 'react-router-dom'
+import LightModeIcon from '@mui/icons-material/LightMode'
+import DarkModeIcon from '@mui/icons-material/DarkMode'
 import Navigation from './components/Navigation'
 import Browse from './pages/Browse'
 import Catalog from './pages/Catalog'
@@ -9,7 +11,16 @@ import Home from './pages/Home'
 import { useDebouncedSearch } from './hooks/useDebouncedSearch'
 import { getAllSavedBooks } from './services/indexedDBService'
 
+const THEME_STORAGE_KEY = 'bookpilot-theme'
+
 function AppContent() {
+  const [isDarkTheme, setIsDarkTheme] = useState(() => {
+    if (typeof window === 'undefined') {
+      return false
+    }
+
+    return localStorage.getItem(THEME_STORAGE_KEY) === 'dark'
+  })
   const [inputValue, setInputValue] = useState('')
   const [actualSearchQuery, setActualSearchQuery] = useState('')
   const [page, setPage] = useState(1)
@@ -34,10 +45,31 @@ function AppContent() {
     refreshCounts()
   }, [refreshCounts])
 
+  useEffect(() => {
+    document.documentElement.classList.toggle('theme-dark', isDarkTheme)
+    document.body.classList.toggle('theme-dark', isDarkTheme)
+    localStorage.setItem(THEME_STORAGE_KEY, isDarkTheme ? 'dark' : 'light')
+  }, [isDarkTheme])
+
+  const handleThemeToggle = () => {
+    setIsDarkTheme((previousTheme) => !previousTheme)
+  }
+
   return (
     <div className="app-container">
       <header className="header">
-        <h1>BookPilot</h1>
+        <div className="header-title-row">
+          <h1>BookPilot</h1>
+          <button
+            type="button"
+            className="theme-toggle-button"
+            onClick={handleThemeToggle}
+            aria-label={isDarkTheme ? 'Switch to light theme' : 'Switch to dark theme'}
+            title={isDarkTheme ? 'Switch to light theme' : 'Switch to dark theme'}
+          >
+            {isDarkTheme ? <LightModeIcon /> : <DarkModeIcon />}
+          </button>
+        </div>
         <p>Your personal book reading companion</p>
       </header>
 

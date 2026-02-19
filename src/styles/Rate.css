@@ -413,3 +413,44 @@
     font-size: 1.1em;
   }
 }
+
+.theme-dark .rate-title {
+  color: var(--primary);
+}
+
+.theme-dark .rate-subtitle,
+.theme-dark .rate-empty p,
+.theme-dark .rate-empty-subtitle,
+.theme-dark .rating-cover-placeholder {
+  color: var(--text-light) !important;
+}
+
+.theme-dark .rate-status,
+.theme-dark .rate-empty {
+  background-color: var(--surface);
+}
+
+.theme-dark .rate-error {
+  background-color: rgba(196, 28, 59, 0.12);
+  color: #f0b8c2;
+}
+
+.theme-dark .rating-book-card {
+  background-color: var(--surface-soft);
+}
+
+.theme-dark .rating-book-card.rating-five-stars {
+  background: linear-gradient(135deg, #3b3027 0%, #2e2621 100%);
+}
+
+.theme-dark .rating-book-card.rating-four-stars {
+  background: linear-gradient(135deg, #3a2f27 0%, #312922 100%);
+}
+
+.theme-dark .rating-book-cover {
+  background-color: #2b241f;
+}
+
+.theme-dark .rating-star.empty {
+  color: #7a6a58;
+}

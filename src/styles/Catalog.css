@@ -524,3 +524,64 @@
     font-size: 13px;
   }
 }
+
+.theme-dark .catalog-title,
+.theme-dark .section-title,
+.theme-dark .side-section-title,
+.theme-dark .book-title,
+.theme-dark .minimal-book-title {
+  color: var(--primary);
+}
+
+.theme-dark .catalog-status,
+.theme-dark .catalog-empty {
+  background-color: var(--surface);
+}
+
+.theme-dark .catalog-error {
+  background-color: rgba(196, 28, 59, 0.12);
+  color: #f0b8c2;
+}
+
+.theme-dark .catalog-section,
+.theme-dark .catalog-side-section,
+.theme-dark .catalog-book-card,
+.theme-dark .catalog-book-card-minimal {
+  background-color: var(--surface-soft);
+  border-color: var(--border);
+}
+
+.theme-dark .book-cover,
+.theme-dark .minimal-book-cover {
+  background-color: #2b241f;
+  border-color: var(--border);
+}
+
+.theme-dark .book-author,
+.theme-dark .book-year,
+.theme-dark .book-detail,
+.theme-dark .book-saved-date,
+.theme-dark .section-empty,
+.theme-dark .cover-placeholder,
+.theme-dark .minimal-cover-placeholder,
+.theme-dark .catalog-empty p,
+.theme-dark .catalog-empty-subtitle {
+  color: var(--text-light) !important;
+}
+
+.theme-dark .book-label {
+  color: var(--text);
+}
+
+.theme-dark .status-button,
+.theme-dark .action-icon-button {
+  background-color: #4a3c33;
+  border-color: #5a4a40;
+  color: var(--text-light);
+}
+
+.theme-dark .status-button.active {
+  background-color: var(--secondary);
+  border-color: var(--secondary);
+  color: #2b2118;
+}

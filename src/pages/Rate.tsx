@@ -13,12 +13,10 @@ export default function Rate({ onCountsChange }: RateProps) {
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
-  // Helper function to sort books
+  // Helper function to sort books by progress
   const sortBooksByProgressAndRating = (books: SavedBook[]): SavedBook[] => {
     return [...books].sort((a, b) => {
-      const progressDiff = (b.progress ?? 0) - (a.progress ?? 0)
-      if (progressDiff !== 0) return progressDiff
-      return (b.rating ?? 0) - (a.rating ?? 0)
+      return (b.progress ?? 0) - (a.progress ?? 0)
     })
   }
 

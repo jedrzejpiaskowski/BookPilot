@@ -16,6 +16,7 @@ BookPilot is a personal book reading planner with a clean, intuitive interface. 
 
 **Design & UX:**
 - Elegant serif typography (Playfair Display for headers, Lora for body text) with a warm beige background resembling aged paper
+- Light theme by default with a user-toggleable dark mode (dark gray with subtle brown tones and beige typography) via the header icon
 - Responsive layout that adapts to mobile, tablet, and desktop screens
 - Smooth transitions and animations for page reordering when books are rated or progress changes
 - Toast notifications with Material-UI Snackbar for user actions (save, remove, completion)

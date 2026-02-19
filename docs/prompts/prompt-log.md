@@ -448,3 +448,13 @@ I want more classic looking book and definitely not blue color
 ----------
 As per industry standard does #file:index.html need some updating? perhaps more descriptive (yet brief) title and some metadata?
 
+----------
+19-02-26 10:16
+----------
+#codebase Can you add new dark theme to the app? I want current (bright) to be the default but want to allow users to toggle it via icon added next to main title header in #file:App.tsx. Dark theme should have dark grey (with hints of brown) background and beige typography. Keep the golden accents and animations.
+
+----------
+19-02-26 10:34
+----------
+Update #file:README.md to mention light/dark theme functionality
+

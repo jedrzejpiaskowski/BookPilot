@@ -290,3 +290,24 @@
     font-size: 18px;
   }
 }
+
+.theme-dark .book-details-dialog {
+  background-color: var(--surface);
+}
+
+.theme-dark .details-title,
+.theme-dark .detail-value,
+.theme-dark .author-bio,
+.theme-dark .author-alternate strong {
+  color: var(--primary);
+}
+
+.theme-dark .close-button,
+.theme-dark .close-button:hover,
+.theme-dark .detail-label,
+.theme-dark .author-loading,
+.theme-dark .author-unavailable,
+.theme-dark .author-dates,
+.theme-dark .author-alternate {
+  color: var(--text-light) !important;
+}

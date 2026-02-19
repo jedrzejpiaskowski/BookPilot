@@ -318,6 +318,27 @@
   min-width: 0;
   display: flex;
   flex-direction: column;
+
+}
+
+.theme-dark .search-input,
+.theme-dark .search-type-select,
+.theme-dark .clear-button,
+.theme-dark .book-result-card {
+  background-color: var(--surface-soft);
+  color: var(--text);
+}
+
+.theme-dark .search-button {
+  color: #2b2118;
+}
+
+.theme-dark .book-cover {
+  background-color: #2b241f;
+}
+
+.theme-dark .results-error {
+  background-color: rgba(196, 28, 59, 0.12);
 }
 
 .book-header {
