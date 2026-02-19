@@ -1,6 +1,7 @@
 # BookPilot - Book Reading Planner
 
 A modern React application for managing your reading plans and tracking reading progress.
+Test it out [here](https://jedrzejpiaskowski.github.io/BookPilot).
 
 ## Overview
 
