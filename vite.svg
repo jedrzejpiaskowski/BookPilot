@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="Classic book icon">
+	<rect width="64" height="64" rx="12" fill="#2b2118" />
+	<rect x="13" y="9" width="38" height="46" rx="5" fill="#6f1d1b" />
+	<rect x="18" y="9" width="4" height="46" fill="#4a130f" />
+	<rect x="23" y="14" width="23" height="36" rx="2.5" fill="#efe3cc" />
+	<path d="M26 23h17M26 29h17M26 35h14" stroke="#8a6f4d" stroke-width="2.2" stroke-linecap="round" />
+	<path d="M33 9v46" stroke="#dbc9aa" stroke-width="1.6" opacity="0.85" />
+	<path d="M13 51c4-3 8-3 12 0" stroke="#2b2118" stroke-width="2" opacity="0.35" fill="none" />
+</svg>
